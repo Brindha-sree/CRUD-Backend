@@ -3,7 +3,7 @@ const express = require("express");
 const router = express.Router();
 const Book = require("../models/Book");
 
-router.get("/", (req, res) => {
+router.get("/get", (req, res) => {
   Book.find()
     .then((data) => {
       res.json(data);
@@ -14,10 +14,11 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  console.log(req.body.title, req.body.description);
+  const {title , description}=req.body
+   console.log(req.body.title, req.body.description);
   const book = new Book({
-    title: req.body.title,
-    description: req.body.description
+    title, 
+    description 
   });
 
   book.save()

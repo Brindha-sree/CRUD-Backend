@@ -1,3 +1,4 @@
+const env = require('dotenv').config()
 const express = require('express');
 const app = express();
 const cors = require('cors');
@@ -13,20 +14,26 @@ app.use(express.json());
 
 app.use('/books', booksRoute);
 
-mongoose.connect('mongodb+srv://Brindha:5YJ9GX3Rdkj5cFjv@brindhab46.25wsigk.mongodb.net/?retryWrites=true&w=majority');
-const con = mongoose.connection; 
+const port= process.env.PORT || 5000;
+app.listen(port,() =>{
+  console.log("server start")
+});
 
-try {
-    con.on("open", () => {
-      console.log("MongoDB connected!!!!");
-    });
-  } catch (error) {
-    console.log("Error: " + error);
-  }
+mongoose.connect(process.env.db)
+.then(()=>{
+  console.log('DB connected')
+}).catch((error) =>{
+  console.log(error)
+})
+  
+
+
 
 
 app.get('/', (req, res) => {
     res.send("Hello GUVIB46!!! - from get method!!"); 
 })
 
-app.listen(4000);
+
+
+
