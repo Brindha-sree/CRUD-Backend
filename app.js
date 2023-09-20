@@ -31,7 +31,7 @@ mongoose.connect(process.env.db)
 
 
 app.get('/', (req, res) => {
-    res.send("Hello GUVIB46!!! - from get method!!"); 
+    res.send(" Get Method"); 
 })
 
 
